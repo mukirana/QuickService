@@ -16,11 +16,7 @@ namespace QuickService.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult SelectBus(int id)
-        {
-            return View();
-        }
+       
         [HttpPost]
         public JsonResult getBus(string SourceStation, string DestinationStation, DateTime DateOfJourney)
         {

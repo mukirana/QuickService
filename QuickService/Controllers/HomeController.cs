@@ -9,14 +9,10 @@ namespace QuickService.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(int val=0)
+        public ActionResult Index(int id)
         {
-            List<SeatStatuDTO> BookedSeats = new BusBL().BookedSeats(1);
-
-            if (val ==0)
-                return View();
-            else
-                return Content("No data");
+            List<SeatStatuDTO> BookedSeats = new BusBL().BookedSeats(id);
+            return View();
         }
     }
 }
