@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BusBookingSystemModelStoreContainer" CdmEntityContainer="BusBookingSystemEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+          <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="AdminContactNumber" ColumnName="AdminContactNumber" />
+          <ScalarProperty Name="AdminGender" ColumnName="AdminGender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingDetails">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.BookingDetail">
+        <MappingFragment StoreEntitySet="BookingDetails">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+          <ScalarProperty Name="PassengerName" ColumnName="PassengerName" />
+          <ScalarProperty Name="PassengerAge" ColumnName="PassengerAge" />
+          <ScalarProperty Name="PassengerGender" ColumnName="PassengerGender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buses">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Bus">
+        <MappingFragment StoreEntitySet="Bus">
+          <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusDetails">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.BusDetail">
+        <MappingFragment StoreEntitySet="BusDetails">
+          <ScalarProperty Name="BusName" ColumnName="BusName" />
+          <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+          <ScalarProperty Name="BusType" ColumnName="BusType" />
+          <ScalarProperty Name="Fare" ColumnName="Fare" />
+          <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+          <ScalarProperty Name="BusContactNumber" ColumnName="BusContactNumber" />
+          <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusStatus">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.BusStatu">
+        <MappingFragment StoreEntitySet="BusStatus">
+          <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+          <ScalarProperty Name="SeatFilled" ColumnName="SeatFilled" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="BusStatusId" ColumnName="BusStatusId" />
+          <ScalarProperty Name="BusTimingId" ColumnName="BusTimingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusTimings">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.BusTiming">
+        <MappingFragment StoreEntitySet="BusTiming">
+          <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="StartingTime" ColumnName="StartingTime" />
+          <ScalarProperty Name="BusTimingId" ColumnName="BusTimingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelBookings">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.CancelBooking">
+        <MappingFragment StoreEntitySet="CancelBooking">
+          <ScalarProperty Name="CancellationId" ColumnName="CancellationId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="CancellationDate" ColumnName="CancellationDate" />
+          <ScalarProperty Name="RefundId" ColumnName="RefundId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+          <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
+          <ScalarProperty Name="CustomerGender" ColumnName="CustomerGender" />
+          <ScalarProperty Name="CustomerContactNumber" ColumnName="CustomerContactNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentDetails">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.PaymentDetail">
+        <MappingFragment StoreEntitySet="PaymentDetails">
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Queries">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Query">
+        <MappingFragment StoreEntitySet="Query">
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Refunds">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Refund">
+        <MappingFragment StoreEntitySet="Refund">
+          <ScalarProperty Name="RefundId" ColumnName="RefundId" />
+          <ScalarProperty Name="RefundMoney" ColumnName="RefundMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Routes">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Route">
+        <MappingFragment StoreEntitySet="Route">
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="StartingPoint" ColumnName="StartingPoint" />
+          <ScalarProperty Name="DroppingPoint" ColumnName="DroppingPoint" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stops">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Stop">
+        <MappingFragment StoreEntitySet="Stop">
+          <ScalarProperty Name="StopId" ColumnName="StopId" />
+          <ScalarProperty Name="StopName" ColumnName="StopName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketBookings">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.TicketBooking">
+        <MappingFragment StoreEntitySet="TicketBooking">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="NumberOfSeat" ColumnName="NumberOfSeat" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="BusStatusId" ColumnName="BusStatusId" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pricings">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.Pricing">
+        <MappingFragment StoreEntitySet="Pricing">
+          <ScalarProperty Name="KmPrice" ColumnName="KmPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RouteStops">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.RouteStop">
+        <MappingFragment StoreEntitySet="RouteStop">
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="StopId" ColumnName="StopId" />
+          <ScalarProperty Name="StopOrder" ColumnName="StopOrder" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="TollPrice" ColumnName="TollPrice" />
+          <ScalarProperty Name="HaltTime" ColumnName="HaltTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeatStatus">
+      <EntityTypeMapping TypeName="BusBookingSystemModel.SeatStatu">
+        <MappingFragment StoreEntitySet="SeatStatus">
+          <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+          <ScalarProperty Name="BusStatusId" ColumnName="BusStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

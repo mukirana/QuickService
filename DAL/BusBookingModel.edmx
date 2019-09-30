@@ -1,0 +1,1131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BusBookingSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AdminEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AdminPassword" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminContactNumber" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdminGender" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingDetails">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="SeatNumber" />
+          </Key>
+          <Property Name="BookingId" Type="int" Nullable="false" />
+          <Property Name="SeatNumber" Type="int" Nullable="false" />
+          <Property Name="PassengerName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PassengerAge" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PassengerGender" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusRegistrationNumber" />
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="BusRegistrationNumber" Type="int" Nullable="false" />
+          <Property Name="RouteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusDetails">
+          <Key>
+            <PropertyRef Name="BusRegistrationNumber" />
+          </Key>
+          <Property Name="BusName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="BusRegistrationNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusType" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Fare" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="BasePrice" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="BusContactNumber" Type="int" Nullable="false" />
+          <Property Name="TotalSeat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusStatus">
+          <Key>
+            <PropertyRef Name="BusStatusId" />
+          </Key>
+          <Property Name="BusRegistrationNumber" Type="int" Nullable="false" />
+          <Property Name="SeatFilled" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="RouteId" Type="int" Nullable="false" />
+          <Property Name="BusStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusTimingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusTiming">
+          <Key>
+            <PropertyRef Name="BusTimingId" />
+          </Key>
+          <Property Name="BusRegistrationNumber" Type="int" Nullable="false" />
+          <Property Name="RouteId" Type="int" Nullable="false" />
+          <Property Name="StartingTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="BusTimingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CancelBooking">
+          <Key>
+            <PropertyRef Name="CancellationId" />
+          </Key>
+          <Property Name="CancellationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingId" Type="int" Nullable="false" />
+          <Property Name="CancellationDate" Type="date" Nullable="false" />
+          <Property Name="RefundId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CustomerPassword" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CustomerGender" Type="nvarchar" MaxLength="200" />
+          <Property Name="CustomerContactNumber" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="PaymentDetails">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentStatus" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PaymentDate" Type="date" Nullable="false" />
+          <Property Name="PaymentTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusBookingSystem.dbo.Pricing' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Pricing">
+          <Key>
+            <PropertyRef Name="KmPrice" />
+          </Key>
+          <Property Name="KmPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="QueryId" />
+          </Key>
+          <Property Name="QueryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Refund">
+          <Key>
+            <PropertyRef Name="RefundId" />
+          </Key>
+          <Property Name="RefundId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefundMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="RouteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartingPoint" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DroppingPoint" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusBookingSystem.dbo.RouteStop' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RouteStop">
+          <Key>
+            <PropertyRef Name="RouteId" />
+            <PropertyRef Name="StopId" />
+            <PropertyRef Name="StopOrder" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Distance" />
+            <PropertyRef Name="TollPrice" />
+            <PropertyRef Name="HaltTime" />
+          </Key>
+          <Property Name="RouteId" Type="int" Nullable="false" />
+          <Property Name="StopId" Type="int" Nullable="false" />
+          <Property Name="StopOrder" Type="int" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Distance" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="TollPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HaltTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusBookingSystem.dbo.SeatStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SeatStatus">
+          <Key>
+            <PropertyRef Name="SeatNumber" />
+            <PropertyRef Name="BusStatusId" />
+          </Key>
+          <Property Name="SeatNumber" Type="int" Nullable="false" />
+          <Property Name="BusStatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stop">
+          <Key>
+            <PropertyRef Name="StopId" />
+          </Key>
+          <Property Name="StopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StopName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketBooking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberOfSeat" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="BusStatusId" Type="int" Nullable="false" />
+          <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="DepartureDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bus_BusDetails">
+          <End Role="BusDetails" Type="Self.BusDetails" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusDetails">
+              <PropertyRef Name="BusRegistrationNumber" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusRegistrationNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusStatus_Bus">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+          <End Role="BusStatus" Type="Self.BusStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="BusRegistrationNumber" />
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="BusStatus">
+              <PropertyRef Name="BusRegistrationNumber" />
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusStatus_BusTiming">
+          <End Role="BusTiming" Type="Self.BusTiming" Multiplicity="1" />
+          <End Role="BusStatus" Type="Self.BusStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusTiming">
+              <PropertyRef Name="BusTimingId" />
+            </Principal>
+            <Dependent Role="BusStatus">
+              <PropertyRef Name="BusTimingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelBooking_Refund">
+          <End Role="Refund" Type="Self.Refund" Multiplicity="1" />
+          <End Role="CancelBooking" Type="Self.CancelBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refund">
+              <PropertyRef Name="RefundId" />
+            </Principal>
+            <Dependent Role="CancelBooking">
+              <PropertyRef Name="RefundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelBooking_TicketBooking">
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="1" />
+          <End Role="CancelBooking" Type="Self.CancelBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketBooking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="CancelBooking">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerBooking_TicketBooking">
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="1" />
+          <End Role="BookingDetails" Type="Self.BookingDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketBooking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="BookingDetails">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Query" Type="Self.Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteStop_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="RouteStop" Type="Self.RouteStop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="RouteStop">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteStop_Stop">
+          <End Role="Stop" Type="Self.Stop" Multiplicity="1" />
+          <End Role="RouteStop" Type="Self.RouteStop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stop">
+              <PropertyRef Name="StopId" />
+            </Principal>
+            <Dependent Role="RouteStop">
+              <PropertyRef Name="StopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatStatus_BusStatus">
+          <End Role="BusStatus" Type="Self.BusStatus" Multiplicity="1" />
+          <End Role="SeatStatus" Type="Self.SeatStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusStatus">
+              <PropertyRef Name="BusStatusId" />
+            </Principal>
+            <Dependent Role="SeatStatus">
+              <PropertyRef Name="BusStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketBooking_BusStatus">
+          <End Role="BusStatus" Type="Self.BusStatus" Multiplicity="1" />
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusStatus">
+              <PropertyRef Name="BusStatusId" />
+            </Principal>
+            <Dependent Role="TicketBooking">
+              <PropertyRef Name="BusStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketBooking_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="TicketBooking">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketBooking_PaymentDetails">
+          <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="1" />
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentDetails">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="TicketBooking">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BusBookingSystemModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingDetails" EntityType="Self.BookingDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusDetails" EntityType="Self.BusDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusStatus" EntityType="Self.BusStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusTiming" EntityType="Self.BusTiming" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CancelBooking" EntityType="Self.CancelBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Query" EntityType="Self.Query" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Refund" EntityType="Self.Refund" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stop" EntityType="Self.Stop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketBooking" EntityType="Self.TicketBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pricing" EntityType="Self.Pricing" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Pricing].[KmPrice] AS [KmPrice]
+    FROM [dbo].[Pricing] AS [Pricing]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RouteStop" EntityType="Self.RouteStop" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RouteStop].[RouteId] AS [RouteId], 
+    [RouteStop].[StopId] AS [StopId], 
+    [RouteStop].[StopOrder] AS [StopOrder], 
+    [RouteStop].[Time] AS [Time], 
+    [RouteStop].[Distance] AS [Distance], 
+    [RouteStop].[TollPrice] AS [TollPrice], 
+    [RouteStop].[HaltTime] AS [HaltTime]
+    FROM [dbo].[RouteStop] AS [RouteStop]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SeatStatus" EntityType="Self.SeatStatus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SeatStatus].[SeatNumber] AS [SeatNumber], 
+    [SeatStatus].[BusStatusId] AS [BusStatusId]
+    FROM [dbo].[SeatStatus] AS [SeatStatus]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Bus_BusDetails" Association="Self.FK_Bus_BusDetails">
+            <End Role="BusDetails" EntitySet="BusDetails" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_Route" Association="Self.FK_Bus_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusStatus_Bus" Association="Self.FK_BusStatus_Bus">
+            <End Role="Bus" EntitySet="Bus" />
+            <End Role="BusStatus" EntitySet="BusStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusStatus_BusTiming" Association="Self.FK_BusStatus_BusTiming">
+            <End Role="BusTiming" EntitySet="BusTiming" />
+            <End Role="BusStatus" EntitySet="BusStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelBooking_Refund" Association="Self.FK_CancelBooking_Refund">
+            <End Role="Refund" EntitySet="Refund" />
+            <End Role="CancelBooking" EntitySet="CancelBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelBooking_TicketBooking" Association="Self.FK_CancelBooking_TicketBooking">
+            <End Role="TicketBooking" EntitySet="TicketBooking" />
+            <End Role="CancelBooking" EntitySet="CancelBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerBooking_TicketBooking" Association="Self.FK_CustomerBooking_TicketBooking">
+            <End Role="TicketBooking" EntitySet="TicketBooking" />
+            <End Role="BookingDetails" EntitySet="BookingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_Customer" Association="Self.FK_PaymentDetails_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_Customer" Association="Self.FK_Query_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Query" EntitySet="Query" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteStop_Route" Association="Self.FK_RouteStop_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteStop" EntitySet="RouteStop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteStop_Stop" Association="Self.FK_RouteStop_Stop">
+            <End Role="Stop" EntitySet="Stop" />
+            <End Role="RouteStop" EntitySet="RouteStop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatStatus_BusStatus" Association="Self.FK_SeatStatus_BusStatus">
+            <End Role="BusStatus" EntitySet="BusStatus" />
+            <End Role="SeatStatus" EntitySet="SeatStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketBooking_BusStatus" Association="Self.FK_TicketBooking_BusStatus">
+            <End Role="BusStatus" EntitySet="BusStatus" />
+            <End Role="TicketBooking" EntitySet="TicketBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketBooking_Customer" Association="Self.FK_TicketBooking_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="TicketBooking" EntitySet="TicketBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketBooking_PaymentDetails" Association="Self.FK_TicketBooking_PaymentDetails">
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+            <End Role="TicketBooking" EntitySet="TicketBooking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BusBookingSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminContactNumber" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdminGender" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingDetail">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="SeatNumber" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" />
+          <Property Name="SeatNumber" Type="Int32" Nullable="false" />
+          <Property Name="PassengerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassengerAge" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassengerGender" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TicketBooking" Relationship="Self.FK_CustomerBooking_TicketBooking" FromRole="BookingDetails" ToRole="TicketBooking" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusRegistrationNumber" />
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="BusRegistrationNumber" Type="Int32" Nullable="false" />
+          <Property Name="RouteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusDetail" Relationship="Self.FK_Bus_BusDetails" FromRole="Bus" ToRole="BusDetails" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_Bus_Route" FromRole="Bus" ToRole="Route" />
+          <NavigationProperty Name="BusStatus" Relationship="Self.FK_BusStatus_Bus" FromRole="Bus" ToRole="BusStatus" />
+        </EntityType>
+        <EntityType Name="BusDetail">
+          <Key>
+            <PropertyRef Name="BusRegistrationNumber" />
+          </Key>
+          <Property Name="BusName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusRegistrationNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fare" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="BasePrice" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="BusContactNumber" Type="Int32" Nullable="false" />
+          <Property Name="TotalSeat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_BusDetails" FromRole="BusDetails" ToRole="Bus" />
+        </EntityType>
+        <EntityType Name="BusStatu">
+          <Key>
+            <PropertyRef Name="BusStatusId" />
+          </Key>
+          <Property Name="BusRegistrationNumber" Type="Int32" Nullable="false" />
+          <Property Name="SeatFilled" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RouteId" Type="Int32" Nullable="false" />
+          <Property Name="BusStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusTimingId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bus" Relationship="Self.FK_BusStatus_Bus" FromRole="BusStatus" ToRole="Bus" />
+          <NavigationProperty Name="BusTiming" Relationship="Self.FK_BusStatus_BusTiming" FromRole="BusStatus" ToRole="BusTiming" />
+          <NavigationProperty Name="SeatStatus" Relationship="Self.FK_SeatStatus_BusStatus" FromRole="BusStatus" ToRole="SeatStatus" />
+          <NavigationProperty Name="TicketBookings" Relationship="Self.FK_TicketBooking_BusStatus" FromRole="BusStatus" ToRole="TicketBooking" />
+        </EntityType>
+        <EntityType Name="BusTiming">
+          <Key>
+            <PropertyRef Name="BusTimingId" />
+          </Key>
+          <Property Name="BusRegistrationNumber" Type="Int32" Nullable="false" />
+          <Property Name="RouteId" Type="Int32" Nullable="false" />
+          <Property Name="StartingTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="BusTimingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BusStatus" Relationship="Self.FK_BusStatus_BusTiming" FromRole="BusTiming" ToRole="BusStatus" />
+        </EntityType>
+        <EntityType Name="CancelBooking">
+          <Key>
+            <PropertyRef Name="CancellationId" />
+          </Key>
+          <Property Name="CancellationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingId" Type="Int32" Nullable="false" />
+          <Property Name="CancellationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RefundId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Refund" Relationship="Self.FK_CancelBooking_Refund" FromRole="CancelBooking" ToRole="Refund" />
+          <NavigationProperty Name="TicketBooking" Relationship="Self.FK_CancelBooking_TicketBooking" FromRole="CancelBooking" ToRole="TicketBooking" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerGender" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerContactNumber" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_Customer" FromRole="Customer" ToRole="PaymentDetails" />
+          <NavigationProperty Name="Queries" Relationship="Self.FK_Query_Customer" FromRole="Customer" ToRole="Query" />
+          <NavigationProperty Name="TicketBookings" Relationship="Self.FK_TicketBooking_Customer" FromRole="Customer" ToRole="TicketBooking" />
+        </EntityType>
+        <EntityType Name="PaymentDetail">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PaymentTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CustomerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_PaymentDetails_Customer" FromRole="PaymentDetails" ToRole="Customer" />
+          <NavigationProperty Name="TicketBookings" Relationship="Self.FK_TicketBooking_PaymentDetails" FromRole="PaymentDetails" ToRole="TicketBooking" />
+        </EntityType>
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="QueryId" />
+          </Key>
+          <Property Name="QueryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Query_Customer" FromRole="Query" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Refund">
+          <Key>
+            <PropertyRef Name="RefundId" />
+          </Key>
+          <Property Name="RefundId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefundMoney" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="CancelBookings" Relationship="Self.FK_CancelBooking_Refund" FromRole="Refund" ToRole="CancelBooking" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="RouteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartingPoint" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DroppingPoint" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_Route" FromRole="Route" ToRole="Bus" />
+          <NavigationProperty Name="RouteStops" Relationship="Self.FK_RouteStop_Route" FromRole="Route" ToRole="RouteStop" />
+        </EntityType>
+        <EntityType Name="Stop">
+          <Key>
+            <PropertyRef Name="StopId" />
+          </Key>
+          <Property Name="StopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StopName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RouteStops" Relationship="Self.FK_RouteStop_Stop" FromRole="Stop" ToRole="RouteStop" />
+        </EntityType>
+        <EntityType Name="TicketBooking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberOfSeat" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BusStatusId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BookingDetails" Relationship="Self.FK_CustomerBooking_TicketBooking" FromRole="TicketBooking" ToRole="BookingDetails" />
+          <NavigationProperty Name="BusStatu" Relationship="Self.FK_TicketBooking_BusStatus" FromRole="TicketBooking" ToRole="BusStatus" />
+          <NavigationProperty Name="CancelBookings" Relationship="Self.FK_CancelBooking_TicketBooking" FromRole="TicketBooking" ToRole="CancelBooking" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_TicketBooking_Customer" FromRole="TicketBooking" ToRole="Customer" />
+          <NavigationProperty Name="PaymentDetail" Relationship="Self.FK_TicketBooking_PaymentDetails" FromRole="TicketBooking" ToRole="PaymentDetails" />
+        </EntityType>
+        <EntityType Name="Pricing">
+          <Key>
+            <PropertyRef Name="KmPrice" />
+          </Key>
+          <Property Name="KmPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RouteStop">
+          <Key>
+            <PropertyRef Name="RouteId" />
+            <PropertyRef Name="StopId" />
+            <PropertyRef Name="StopOrder" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Distance" />
+            <PropertyRef Name="TollPrice" />
+            <PropertyRef Name="HaltTime" />
+          </Key>
+          <Property Name="RouteId" Type="Int32" Nullable="false" />
+          <Property Name="StopId" Type="Int32" Nullable="false" />
+          <Property Name="StopOrder" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Distance" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="TollPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HaltTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_RouteStop_Route" FromRole="RouteStop" ToRole="Route" />
+          <NavigationProperty Name="Stop" Relationship="Self.FK_RouteStop_Stop" FromRole="RouteStop" ToRole="Stop" />
+        </EntityType>
+        <EntityType Name="SeatStatu">
+          <Key>
+            <PropertyRef Name="SeatNumber" />
+            <PropertyRef Name="BusStatusId" />
+          </Key>
+          <Property Name="SeatNumber" Type="Int32" Nullable="false" />
+          <Property Name="BusStatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusStatu" Relationship="Self.FK_SeatStatus_BusStatus" FromRole="SeatStatus" ToRole="BusStatus" />
+        </EntityType>
+        <Association Name="FK_CustomerBooking_TicketBooking">
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="1" />
+          <End Role="BookingDetails" Type="Self.BookingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketBooking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="BookingDetails">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_BusDetails">
+          <End Role="BusDetails" Type="Self.BusDetail" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusDetails">
+              <PropertyRef Name="BusRegistrationNumber" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusRegistrationNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bus_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusStatus_Bus">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+          <End Role="BusStatus" Type="Self.BusStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="BusRegistrationNumber" />
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="BusStatus">
+              <PropertyRef Name="BusRegistrationNumber" />
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusStatus_BusTiming">
+          <End Role="BusTiming" Type="Self.BusTiming" Multiplicity="1" />
+          <End Role="BusStatus" Type="Self.BusStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusTiming">
+              <PropertyRef Name="BusTimingId" />
+            </Principal>
+            <Dependent Role="BusStatus">
+              <PropertyRef Name="BusTimingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeatStatus_BusStatus">
+          <End Role="BusStatus" Type="Self.BusStatu" Multiplicity="1" />
+          <End Role="SeatStatus" Type="Self.SeatStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusStatus">
+              <PropertyRef Name="BusStatusId" />
+            </Principal>
+            <Dependent Role="SeatStatus">
+              <PropertyRef Name="BusStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketBooking_BusStatus">
+          <End Role="BusStatus" Type="Self.BusStatu" Multiplicity="1" />
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusStatus">
+              <PropertyRef Name="BusStatusId" />
+            </Principal>
+            <Dependent Role="TicketBooking">
+              <PropertyRef Name="BusStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelBooking_Refund">
+          <End Role="Refund" Type="Self.Refund" Multiplicity="1" />
+          <End Role="CancelBooking" Type="Self.CancelBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refund">
+              <PropertyRef Name="RefundId" />
+            </Principal>
+            <Dependent Role="CancelBooking">
+              <PropertyRef Name="RefundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CancelBooking_TicketBooking">
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="1" />
+          <End Role="CancelBooking" Type="Self.CancelBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketBooking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="CancelBooking">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentDetails_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PaymentDetails">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Query_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Query" Type="Self.Query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Query">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketBooking_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="TicketBooking">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketBooking_PaymentDetails">
+          <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="1" />
+          <End Role="TicketBooking" Type="Self.TicketBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentDetails">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="TicketBooking">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteStop_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="RouteStop" Type="Self.RouteStop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="RouteStop">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteStop_Stop">
+          <End Role="Stop" Type="Self.Stop" Multiplicity="1" />
+          <End Role="RouteStop" Type="Self.RouteStop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stop">
+              <PropertyRef Name="StopId" />
+            </Principal>
+            <Dependent Role="RouteStop">
+              <PropertyRef Name="StopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BusBookingSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="BookingDetails" EntityType="Self.BookingDetail" />
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="BusDetails" EntityType="Self.BusDetail" />
+          <EntitySet Name="BusStatus" EntityType="Self.BusStatu" />
+          <EntitySet Name="BusTimings" EntityType="Self.BusTiming" />
+          <EntitySet Name="CancelBookings" EntityType="Self.CancelBooking" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetail" />
+          <EntitySet Name="Queries" EntityType="Self.Query" />
+          <EntitySet Name="Refunds" EntityType="Self.Refund" />
+          <EntitySet Name="Routes" EntityType="Self.Route" />
+          <EntitySet Name="Stops" EntityType="Self.Stop" />
+          <EntitySet Name="TicketBookings" EntityType="Self.TicketBooking" />
+          <EntitySet Name="Pricings" EntityType="Self.Pricing" />
+          <EntitySet Name="RouteStops" EntityType="Self.RouteStop" />
+          <EntitySet Name="SeatStatus" EntityType="Self.SeatStatu" />
+          <AssociationSet Name="FK_CustomerBooking_TicketBooking" Association="Self.FK_CustomerBooking_TicketBooking">
+            <End Role="TicketBooking" EntitySet="TicketBookings" />
+            <End Role="BookingDetails" EntitySet="BookingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_BusDetails" Association="Self.FK_Bus_BusDetails">
+            <End Role="BusDetails" EntitySet="BusDetails" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bus_Route" Association="Self.FK_Bus_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusStatus_Bus" Association="Self.FK_BusStatus_Bus">
+            <End Role="Bus" EntitySet="Buses" />
+            <End Role="BusStatus" EntitySet="BusStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusStatus_BusTiming" Association="Self.FK_BusStatus_BusTiming">
+            <End Role="BusTiming" EntitySet="BusTimings" />
+            <End Role="BusStatus" EntitySet="BusStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeatStatus_BusStatus" Association="Self.FK_SeatStatus_BusStatus">
+            <End Role="BusStatus" EntitySet="BusStatus" />
+            <End Role="SeatStatus" EntitySet="SeatStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketBooking_BusStatus" Association="Self.FK_TicketBooking_BusStatus">
+            <End Role="BusStatus" EntitySet="BusStatus" />
+            <End Role="TicketBooking" EntitySet="TicketBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelBooking_Refund" Association="Self.FK_CancelBooking_Refund">
+            <End Role="Refund" EntitySet="Refunds" />
+            <End Role="CancelBooking" EntitySet="CancelBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CancelBooking_TicketBooking" Association="Self.FK_CancelBooking_TicketBooking">
+            <End Role="TicketBooking" EntitySet="TicketBookings" />
+            <End Role="CancelBooking" EntitySet="CancelBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentDetails_Customer" Association="Self.FK_PaymentDetails_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Query_Customer" Association="Self.FK_Query_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Query" EntitySet="Queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketBooking_Customer" Association="Self.FK_TicketBooking_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="TicketBooking" EntitySet="TicketBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketBooking_PaymentDetails" Association="Self.FK_TicketBooking_PaymentDetails">
+            <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+            <End Role="TicketBooking" EntitySet="TicketBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteStop_Route" Association="Self.FK_RouteStop_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="RouteStop" EntitySet="RouteStops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteStop_Stop" Association="Self.FK_RouteStop_Stop">
+            <End Role="Stop" EntitySet="Stops" />
+            <End Role="RouteStop" EntitySet="RouteStops" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BusBookingSystemModelStoreContainer" CdmEntityContainer="BusBookingSystemEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="AdminContactNumber" ColumnName="AdminContactNumber" />
+                <ScalarProperty Name="AdminGender" ColumnName="AdminGender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingDetails">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.BookingDetail">
+              <MappingFragment StoreEntitySet="BookingDetails">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+                <ScalarProperty Name="PassengerName" ColumnName="PassengerName" />
+                <ScalarProperty Name="PassengerAge" ColumnName="PassengerAge" />
+                <ScalarProperty Name="PassengerGender" ColumnName="PassengerGender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusDetails">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.BusDetail">
+              <MappingFragment StoreEntitySet="BusDetails">
+                <ScalarProperty Name="BusName" ColumnName="BusName" />
+                <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+                <ScalarProperty Name="Fare" ColumnName="Fare" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="BusContactNumber" ColumnName="BusContactNumber" />
+                <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusStatus">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.BusStatu">
+              <MappingFragment StoreEntitySet="BusStatus">
+                <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+                <ScalarProperty Name="SeatFilled" ColumnName="SeatFilled" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="BusStatusId" ColumnName="BusStatusId" />
+                <ScalarProperty Name="BusTimingId" ColumnName="BusTimingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusTimings">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.BusTiming">
+              <MappingFragment StoreEntitySet="BusTiming">
+                <ScalarProperty Name="BusRegistrationNumber" ColumnName="BusRegistrationNumber" />
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="StartingTime" ColumnName="StartingTime" />
+                <ScalarProperty Name="BusTimingId" ColumnName="BusTimingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CancelBookings">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.CancelBooking">
+              <MappingFragment StoreEntitySet="CancelBooking">
+                <ScalarProperty Name="CancellationId" ColumnName="CancellationId" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="CancellationDate" ColumnName="CancellationDate" />
+                <ScalarProperty Name="RefundId" ColumnName="RefundId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
+                <ScalarProperty Name="CustomerGender" ColumnName="CustomerGender" />
+                <ScalarProperty Name="CustomerContactNumber" ColumnName="CustomerContactNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentDetails">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.PaymentDetail">
+              <MappingFragment StoreEntitySet="PaymentDetails">
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Queries">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Query">
+              <MappingFragment StoreEntitySet="Query">
+                <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Refunds">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Refund">
+              <MappingFragment StoreEntitySet="Refund">
+                <ScalarProperty Name="RefundId" ColumnName="RefundId" />
+                <ScalarProperty Name="RefundMoney" ColumnName="RefundMoney" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="StartingPoint" ColumnName="StartingPoint" />
+                <ScalarProperty Name="DroppingPoint" ColumnName="DroppingPoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stops">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Stop">
+              <MappingFragment StoreEntitySet="Stop">
+                <ScalarProperty Name="StopId" ColumnName="StopId" />
+                <ScalarProperty Name="StopName" ColumnName="StopName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketBookings">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.TicketBooking">
+              <MappingFragment StoreEntitySet="TicketBooking">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="NumberOfSeat" ColumnName="NumberOfSeat" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="BusStatusId" ColumnName="BusStatusId" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pricings">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.Pricing">
+              <MappingFragment StoreEntitySet="Pricing">
+                <ScalarProperty Name="KmPrice" ColumnName="KmPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteStops">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.RouteStop">
+              <MappingFragment StoreEntitySet="RouteStop">
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="StopId" ColumnName="StopId" />
+                <ScalarProperty Name="StopOrder" ColumnName="StopOrder" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="TollPrice" ColumnName="TollPrice" />
+                <ScalarProperty Name="HaltTime" ColumnName="HaltTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeatStatus">
+            <EntityTypeMapping TypeName="BusBookingSystemModel.SeatStatu">
+              <MappingFragment StoreEntitySet="SeatStatus">
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+                <ScalarProperty Name="BusStatusId" ColumnName="BusStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

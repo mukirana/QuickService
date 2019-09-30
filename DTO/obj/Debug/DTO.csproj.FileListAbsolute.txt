@@ -1,0 +1,10 @@
+D:\Projects\learning project code\QuickService\DTO\bin\Debug\DTO.dll
+D:\Projects\learning project code\QuickService\DTO\bin\Debug\DTO.pdb
+D:\Projects\learning project code\QuickService\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
+D:\Projects\learning project code\QuickService\DTO\obj\Debug\DTO.dll
+D:\Projects\learning project code\QuickService\DTO\obj\Debug\DTO.pdb
+D:\Projects\Learning Sample Code\QuickService\DTO\bin\Debug\DTO.dll
+D:\Projects\Learning Sample Code\QuickService\DTO\bin\Debug\DTO.pdb
+D:\Projects\Learning Sample Code\QuickService\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
+D:\Projects\Learning Sample Code\QuickService\DTO\obj\Debug\DTO.dll
+D:\Projects\Learning Sample Code\QuickService\DTO\obj\Debug\DTO.pdb

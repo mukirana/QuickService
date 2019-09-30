@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5492931051f64cd4a6c5a1ab9fddead6" Name="Diagram1">
+        <EntityTypeShape EntityType="BusBookingSystemModel.Admin" Width="1.5" PointX="5.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.BookingDetail" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Bus" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.BusDetail" Width="1.5" PointX="1.375" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.BusStatu" Width="1.5" PointX="3.125" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.BusTiming" Width="1.5" PointX="1.125" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.CancelBooking" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Customer" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.PaymentDetail" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Query" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Refund" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Route" Width="1.5" PointX="1.125" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Stop" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.TicketBooking" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.Pricing" Width="1.5" PointX="7.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.RouteStop" Width="1.5" PointX="3.875" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusBookingSystemModel.SeatStatu" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_CustomerBooking_TicketBooking" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_Bus_BusDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_Bus_Route" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_BusStatus_Bus" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_BusStatus_BusTiming" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_SeatStatus_BusStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_TicketBooking_BusStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_CancelBooking_Refund" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_CancelBooking_TicketBooking" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_PaymentDetails_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_Query_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_TicketBooking_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_TicketBooking_PaymentDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_RouteStop_Route" ManuallyRouted="false" />
+        <AssociationConnector Association="BusBookingSystemModel.FK_RouteStop_Stop" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

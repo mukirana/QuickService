@@ -1,0 +1,15 @@
+D:\Projects\learning project code\QuickService\DAL\bin\Debug\DAL.dll
+D:\Projects\learning project code\QuickService\DAL\bin\Debug\DAL.pdb
+D:\Projects\learning project code\QuickService\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Projects\learning project code\QuickService\DAL\obj\Debug\DAL.dll
+D:\Projects\learning project code\QuickService\DAL\obj\Debug\DAL.pdb
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\DAL.dll.config
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\DAL.dll
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\DAL.pdb
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\EntityFramework.dll
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\EntityFramework.xml
+D:\Projects\Learning Sample Code\QuickService\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Learning Sample Code\QuickService\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Projects\Learning Sample Code\QuickService\DAL\obj\Debug\DAL.dll
+D:\Projects\Learning Sample Code\QuickService\DAL\obj\Debug\DAL.pdb

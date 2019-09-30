@@ -1,0 +1,8 @@
+﻿.front
+{
+background-image:url(/Images/frontimage.jpg);
+overflow:hidden;
+background-size:cover;
+background-repeat:no-repeat;
+position:relative;
+}

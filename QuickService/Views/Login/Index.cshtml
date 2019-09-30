@@ -1,0 +1,217 @@
+﻿@model QuickService.Models.BusStopModel
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    @*for calender*@
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link href="@Url.Content("~/Css/Login.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#date").datepicker({
+                minDate: '0',
+                maxDate: '+1m'
+            });
+            
+            $("#tblEmployee").on('click', '#bookTicket', function () {
+                var item = $(this).attr('name');
+                //alert(item);
+                //$.post("/Login/SelectBus/", item, function () { alert("hd"); });
+                //  window.location.href = "http://localhost:49886/Home/Index/"+item ;
+                $.ajax({
+                    type: "Post",
+                    url: "/Login/SelectBus",
+                    data: ({ id:item}),
+                    success: function (result) {
+                        //do something
+                    }
+                });
+            });
+
+            $("#stop1_StopName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Login/Index",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term, pos: "first" },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.StopName, value: item.StopId };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+
+            $("#stop2_StopName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Login/Index",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term, pos: "end" },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.StopName, value: item.StopId };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+            $('#buttonsubmit').click(function (request, response) {
+                //alert("sss");
+                var SourceStation = document.getElementById("stop1_StopName").value;
+                var DestinationStation = document.getElementById("stop2_StopName").value;
+                var DateOfJourney = document.getElementById("date").value;
+              
+                $.ajax({          
+                    url: "http://localhost:49886/Login/getBus/",
+                    type: "POST",
+                    datatype: "Json",
+                    data: { SourceStation: SourceStation, DestinationStation: DestinationStation, DateOfJourney: DateOfJourney },
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#tblEmployeetbody').children().remove();
+                    $('#NotFound').children().remove();
+                    if (data == false)
+                    {
+                        var rows = "<h3 class='NotFoundMessage'>OOPS! No bus found for this route!!!!</h3>";
+                        $('#NotFound').append(rows);
+                    }
+                    
+                    else
+                    {
+
+                        var rows = "<tr>" +
+                        "<th align='left' class='EmployeeTableTH'>Bus Name</th><th align='left' class='EmployeeTableTH'>Route Name</th><th align='left' class='EmployeeTableTH'>Starting Time</th><th align='left' class='EmployeeTableTH'>Seat Filled</th><th align='left' class='EmployeeTableTH'>Bus Type</th><th align='left' class='EmployeeTableTH'>Fare</th>" +
+                        "</tr>";
+                    $('#tblEmployeetbody').append(rows);
+
+                    $.each(data, function (i, item) {
+                        
+                        var rows = "<tr>" +
+                            "<td class='EmployeeTableTD '>" + item.Bus.BusDetail.BusName + "</td>" +
+                            "<td class='EmployeeTableTD'>" + item.Bus.Route.StartingPoint + " - " + item.Bus.Route.DroppingPoint + "</td>" +
+                            "<td class='EmployeeTableTD'>" + item.BusTiming.StartingTime.Hours+":"+item.BusTiming.StartingTime.Minutes + "</td>" +
+                            "<td class='EmployeeTableTD'>" + item.SeatFilled + " / " + item.Bus.BusDetail.TotalSeat + "</td>" +
+                            "<td class='EmployeeTableTD'>" + item.Bus.BusDetail.BusType + "</td>" +
+                            "<td class='EmployeeTableTD'>" + item.Bus.BusDetail.Fare + "</td>" +
+                            "<td class='EmployeeTableTD'><input class ='btn btn-danger BookTicket' type='button' value='Book' name='" + item.BusStatusId + "' id='bookTicket'/></td>" +
+                            "</tr>";
+                        $('#tblEmployeetbody').append(rows);
+                    });
+                  }
+                }
+            });
+            });
+
+        })
+
+
+    </script>
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">QUICK SERVICE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto" style="float:right;">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fas fa-handshake"></i>CONTACT US<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-bus"></i>ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-user-check"></i>LOGIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-user-plus"></i>REGISTER</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+
+            <div class="form-group">
+
+                <div class="col-md-3">
+                    @Html.Label("From")
+                    @Html.EditorFor(model => model.stop1.StopName, new { htmlAttributes = new { @class = " form-control"} })  
+                   
+                </div>
+                <div class="col-md-3">
+                    @Html.Label("To")
+                    @Html.EditorFor(model => model.stop2.StopName, new { htmlAttributes = new { @class = "form-control"} })
+                </div>
+                <div class="col-md-3" >
+                   @Html.Label("Date")
+                   @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.date)
+                </div>
+                <div class="col-md-3">
+                    <input type="button" value="search" id="buttonsubmit"/>
+                </div>
+            </div>
+
+        </div>
+
+    <div class=" container">
+
+        <table id="tblEmployee" class="table table-hover">
+            <tbody id="tblEmployeetbody" class="table-light">
+
+            </tbody>
+        </table>
+    </div>
+    <div id="NotFound">
+    </div>
+    }
+
+
+</body>
+  

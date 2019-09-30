@@ -1,0 +1,130 @@
+﻿body 
+{
+padding-bottom:0px;
+padding-top:0px;
+overflow-x:hidden;
+}
+.intro
+{
+height:300px;
+padding-bottom:30px;
+padding-top:30px;
+}
+.who
+{
+margin-left:5%;
+margin-right:20px;
+border:2px 2px 2px 2px;
+border-color:black;
+background-color:#deecff;
+box-shadow:8px 8px 3px #808080;
+}
+.outer
+{   
+padding-top:100px;
+text-align:center;
+}
+.inner
+{
+opacity:0;
+}
+.who:hover .inner
+{
+padding-top:35px;
+opacity:1;
+transition-duration:3s;
+text-align:center;
+background-color:#c6cfff;
+}
+.who:hover .outer{    
+transition-duration:0.5s;
+padding-top:15px;
+}
+.social-icons
+{
+max-height:180px;
+
+}
+.fab 
+{
+padding: 15px;
+font-size: 30px;
+text-align: center;
+text-decoration: none;
+margin: 5px 2px;
+border-radius: 50%;
+}
+
+.fab:hover 
+{
+background-color:black;
+}
+.fa-linkedin
+{
+background:#28c3d4;
+color:white;
+}
+.fa-github
+{
+background:#f5b5fc;
+color:white;
+}
+.fa-twitter
+{
+background:#00bdaa;
+color:white;
+}
+.fa-facebook
+{
+background:#f67e7d;
+color:white;
+}
+.fa-skype
+{
+background:#9cf196;
+color:white;
+}
+.footer
+{
+bottom:0px;
+color:black;
+padding-top:30px;
+padding-bottom:30px;
+background: linear-gradient(to bottom, #99ccff 0%, #ff6666 100%);
+}
+li
+{
+list-style-type:none;
+}
+li:hover
+{
+color:white;
+}
+h4
+{
+color:black;
+margin-left:40px;
+}
+.info
+{
+padding-left:80px; 
+}
+.fas 
+{
+padding: 15px;
+font-size: 30px;
+text-align: center;
+text-decoration: none;
+margin: 5px 2px;
+border-radius: 50%;
+}
+
+.fas:hover 
+{
+background-color:black;
+}
+.fa-hands-helping
+{
+background:#28c3d4;
+color:white;
+}
