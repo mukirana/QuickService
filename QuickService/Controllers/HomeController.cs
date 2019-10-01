@@ -12,6 +12,7 @@ namespace QuickService.Controllers
         public ActionResult Index(int id)
         {
             List<SeatStatuDTO> BookedSeats = new BusBL().BookedSeats(id);
+            ViewBag.bookedseats = BookedSeats;
             return View();
         }
     }

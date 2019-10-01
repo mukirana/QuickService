@@ -33,15 +33,8 @@
             
             $("#tblEmployee").on('click', '#bookTicket', function () {
                 var item = $(this).attr('name');
-                //alert(item);
-                //$.post("/Login/SelectBus/", item, function () { alert("hd"); });
+                
                   window.location.href = "http://localhost:49886/Home/Index?id="+item ;
-                //$.call({
-                //    type: "Post",
-                //    url: "/Login/SelectBus",
-                //    data: ({ id:item}),
-                    
-                //});
             });
 
             $("#stop1_StopName").autocomplete({

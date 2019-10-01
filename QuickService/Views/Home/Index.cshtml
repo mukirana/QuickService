@@ -272,6 +272,27 @@
     $(document).ready(function () {
         $('.table th,td').hide();
         $("#Proceed").hide();
+
+       // var value = '@ViewBag.bookedseats';
+        
+        //$( v in value).each(function () {
+        //    alert(v);
+        //});
+
+        //$('.cabin > li').each(function () {
+        //    $(this).find('ol li >input ').each(function () {
+        //        if ($(this).prop("checked") == true) {
+        //            var text = $(this).attr('id');
+        //            var result = "<tr>"
+        //            result += "<td id='tblData'> " + (i++) + "</td><td id='tblData'>" + text + "</td></tr>";
+        //            $("#TicketSelect").append(result);
+        //        }
+
+        //    });
+
+        //});
+
+
         $('input[type="checkbox"]').click(function (e) {
             if ($(this).prop("checked") == true) {
                 var text = $(this).attr("id");
